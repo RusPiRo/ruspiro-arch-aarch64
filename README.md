@@ -8,7 +8,7 @@ To use this crate simply add the dependency to your ``Cargo.toml`` file:
 
 ```toml
 [dependencies]
-ruspiro-platform = "0.1.0"
+ruspiro-arch-aarch64 = "0.1.0"
 ```
 
 ## License
