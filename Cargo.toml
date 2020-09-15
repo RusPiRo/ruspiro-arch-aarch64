@@ -1,0 +1,41 @@
+[package]
+name = "ruspiro-arch-aarch64"
+authors = ["André Borrmann <pspwizard@gmx.de>"]
+version = "0.1.0" # remember to update html_root_url in lib.rs
+description = """
+Place a brief description of this library here
+"""
+license = "Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/RusPiRo/ruspiro-arch-aarch64/tree/v||VERSION||"
+documentation = "https://docs.rs/ruspiro-arch-aarch64/||VERSION||"
+categories = ["no-std", "embedded"]
+keywords = ["ruspiro"]
+edition = "2018"
+exclude = [".travis.yml", "Makefile.toml"]
+
+[badges]
+travis-ci = { repository = "RusPiRo/ruspiro-arch-aarch64", branch = "master" }
+maintenance = { status = "actively-developed" }
+
+[lib]
+
+[build-dependencies]
+# uncomment this if a build.rs script should be run as part of the build process
+# cc = "1.0"
+
+[dependencies]
+# list other dependencies here
+# for every RUSPIRO dependency a corresponding entry
+# in the [patch.crates-io] section pointing to the actual master branch
+# of this crate is required - example:
+# ruspiro-register = "0.4"
+
+[features]
+ruspiro_pi3 = [ ]
+
+[patch.crates-io]
+# we require an entry for each dependent RUSPIRO crate here
+# this increases PR build stability if dependent crates got updated but are not
+# published to crates.io yet
+# ruspiro-register = { git = "https://github.com/RusPiRo/ruspiro-register.git" }
