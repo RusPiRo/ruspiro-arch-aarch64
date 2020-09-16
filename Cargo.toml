@@ -15,7 +15,7 @@ edition = "2018"
 exclude = [".travis.yml", "Makefile.toml"]
 
 [badges]
-travis-ci = { repository = "RusPiRo/ruspiro-arch-aarch64", branch = "master" }
+travis-ci = { repository = "RusPiRo/ruspiro-arch-aarch64", branch = "release" }
 maintenance = { status = "actively-developed" }
 
 [lib]
