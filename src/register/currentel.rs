@@ -7,9 +7,21 @@
 
 //! # CurrentEL - Current Exception Level
 //!
-//! Hold the current exception level
+//! Holds the current exception level
 //!
-
+//! ```no_run
+//! # use ruspiro_arch_aarch64::register::*;
+//!
+//! # fn main() {
+//! // read the current exeption level - do this by accessing the predefined
+//! // register field
+//! let current_el = currentel::read(currentel::EL::Field);
+//!
+//! if current_el == currentel::EL::EL2 {
+//!     /* do something */
+//! }
+//! # }
+//! ```
 use crate::register::*;
 use crate::{define_aarch64_register, impl_system_register_rw, register_field};
 

@@ -61,8 +61,8 @@ macro_rules! impl_system_register_rw {
 ///
 /// # Examples
 /// ```no_run
-/// # #![feature(llvm_asm)]
-/// # use ruspiro_platform::*;
+/// # #![feature(llvm_asm, const_fn)]
+/// # use ruspiro_arch_aarch64::*;
 ///
 /// define_aarch64_register!(
 ///     /// Aarch64 register foo as 32Bit register
@@ -163,7 +163,7 @@ macro_rules! define_aarch64_register {
         #[allow(non_upper_case_globals)]
         pub mod $name {
             #[allow(unused_imports)]
-            use $crate::*;
+            use $crate::{*, register::*};
             $crate::define_aarch64_register!{
                 @$(#[doc = $rdoc])?
                 $name<$t> {
