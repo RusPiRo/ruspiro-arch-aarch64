@@ -5,7 +5,7 @@ version = "0.1.0" # remember to update html_root_url in lib.rs
 description = """
 Place a brief description of this library here
 """
-license = "Apache-2.0"
+license = "MIT OR Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/RusPiRo/ruspiro-arch-aarch64/tree/v||VERSION||"
 documentation = "https://docs.rs/ruspiro-arch-aarch64/||VERSION||"
