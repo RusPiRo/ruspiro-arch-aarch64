@@ -9,7 +9,6 @@
 
 use core::cmp::PartialEq;
 use core::ops::{BitAnd, BitOr, Not, Shl, Shr};
-use core::ptr::{read_volatile, write_volatile};
 
 pub mod currentel;
 pub mod el0;
@@ -45,130 +44,6 @@ macro_rules! registertype_impl {
 // implement the type trait for specific unsigned types to enable only those register types/sizes
 registertype_impl![u8, u16, u32, u64];
 
-/// This struct allows read only access to a register.
-#[derive(Clone, Debug)]
-pub struct ReadOnly<T: RegisterType> {
-    ptr: *mut T, // base address for the register
-}
-
-/// This struct allows write only access to a register.
-#[derive(Clone, Debug)]
-pub struct WriteOnly<T: RegisterType> {
-    ptr: *mut T, // base address for the register
-}
-
-/// This struct allows read/write access to a register.
-#[derive(Clone, Debug)]
-pub struct ReadWrite<T: RegisterType> {
-    ptr: *mut T, // base address for the register
-}
-
-/*************** internal used macros to ease implementation ******************/
-macro_rules! registernew_impl {
-    () => {
-        /// Create a new instance of the register access struct.
-        #[allow(dead_code)]
-        pub const fn new(addr: u32) -> Self {
-            Self {
-                ptr: addr as *mut T,
-            }
-        }
-    };
-}
-
-macro_rules! registerget_impl {
-    () => {
-        /// Read raw content of a register.
-        #[inline]
-        #[allow(dead_code)]
-        pub fn get(&self) -> T {
-            unsafe { read_volatile(self.ptr) }
-        }
-
-        /// Read the value of a specific register field
-        #[inline]
-        #[allow(dead_code)]
-        pub fn read(&self, field: RegisterField<T>) -> T {
-            let val = self.get();
-            (val >> field.shift) & field.mask
-        }
-
-        /// Read the value of the register into a RegisterFieldValue structure
-        #[inline]
-        #[allow(dead_code)]
-        pub fn read_value(&self, field: RegisterField<T>) -> RegisterFieldValue<T> {
-            RegisterFieldValue {
-                field,
-                value: self.read(field),
-            }
-        }
-    };
-}
-
-macro_rules! registerset_impl {
-    () => {
-        /// Write raw content value to the register.
-        #[inline]
-        #[allow(dead_code)]
-        pub fn set(&self, value: T) {
-            unsafe { write_volatile(self.ptr, value) }
-        }
-
-        /// Write the value of a specific register field
-        #[inline]
-        #[allow(dead_code)]
-        pub fn write(&self, field: RegisterField<T>, value: T) {
-            let val = (value & field.mask) << field.shift;
-            self.set(val);
-        }
-
-        /// Write the value of a given RegisterFieldValue to the register
-        #[inline]
-        #[allow(dead_code)]
-        pub fn write_value(&self, fieldvalue: RegisterFieldValue<T>) {
-            self.write(fieldvalue.field, fieldvalue.value);
-        }
-    };
-}
-
-impl<T: RegisterType> ReadOnly<T> {
-    registernew_impl!();
-    registerget_impl!();
-}
-
-impl<T: RegisterType> WriteOnly<T> {
-    registernew_impl!();
-    registerset_impl!();
-}
-
-impl<T: RegisterType> ReadWrite<T> {
-    registernew_impl!();
-    registerget_impl!();
-    registerset_impl!();
-
-    /// Udate a register field with a given value
-    #[inline]
-    #[allow(dead_code)]
-    pub fn modify(&self, field: RegisterField<T>, value: T) -> T {
-        let old_val = self.get();
-        let new_val =
-            (old_val & !(field.mask << field.shift)) | ((value & field.mask) << field.shift);
-
-        self.set(new_val);
-        new_val
-    }
-
-    #[inline]
-    #[allow(dead_code)]
-    pub fn modify_value(&self, fieldvalue: RegisterFieldValue<T>) -> RegisterFieldValue<T> {
-        let new_val = self.modify(fieldvalue.field, fieldvalue.value);
-        RegisterFieldValue {
-            field: fieldvalue.field,
-            value: new_val,
-        }
-    }
-}
-
 /// Definition of a field contained inside of a register. Each field is defined by a mask and the bit shift value
 /// when constructing the field definition the stored mask is already shifted by the shift value
 #[derive(Copy, Clone, Debug)]
@@ -178,7 +53,7 @@ pub struct RegisterField<T: RegisterType> {
 }
 
 /// Definition of a specific fieldvalue of a regiser. This structure allows to combine field values with bit operators
-/// like ``|`` and ``&`` to build the final value that should be written to a register
+/// like ``|`` and ``&`` to build the final value that should be written to a register.
 #[derive(Copy, Clone, Debug)]
 pub struct RegisterFieldValue<T: RegisterType> {
     /// register field definition
@@ -228,7 +103,7 @@ macro_rules! registerfield_impl {
             pub const fn new(field: RegisterField<$t>, value: $t) -> Self {
                 RegisterFieldValue {
                     field,
-                    value: value & field.mask //<< field.shift
+                    value: value & field.mask
                 }
             }
 
@@ -236,7 +111,7 @@ macro_rules! registerfield_impl {
             #[inline]
             #[allow(dead_code)]
             pub fn value(&self) -> $t {
-                self.value //>> self.field.shift()
+                self.value
             }
 
             /// Retrieve the register field raw value, means the value is returned in it's position
@@ -254,6 +129,12 @@ macro_rules! registerfield_impl {
             #[allow(dead_code)]
             pub fn mask(&self) -> $t {
                 self.field.mask()
+            }
+        }
+
+        impl PartialEq for RegisterFieldValue<$t> {
+            fn eq(&self, other: &Self) -> bool {
+                self.value() == other.value()
             }
         }
 
@@ -287,3 +168,52 @@ macro_rules! registerfield_impl {
 }
 
 registerfield_impl![u8, u16, u32, u64];
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn test_register_fieldvalue_eq() {
+        let field1 = RegisterFieldValue::<u32>::new(
+            RegisterField::<u32>::new(3, 0), 7
+        );
+        let field2 = RegisterFieldValue::<u32>::new(
+            RegisterField::<u32>::new(3, 0), 7
+        );
+
+        assert_eq!(field1, field2);
+    }
+
+    #[test]
+    fn test_register_fieldvalue_or() {
+        let field1 = RegisterFieldValue::<u32>::new(
+            RegisterField::<u32>::new(0b11, 0), 3
+        );
+        let field2 = RegisterFieldValue::<u32>::new(
+            RegisterField::<u32>::new(0b1, 2), 1
+        );
+
+        let expected = RegisterFieldValue::<u32>::new(
+            RegisterField::<u32>::new(0b111, 0), 7
+        );
+
+        assert_eq!(expected, field1 | field2);
+    }
+
+    #[test]
+    fn test_register_fieldvalue_and() {
+        let field1 = RegisterFieldValue::<u32>::new(
+            RegisterField::<u32>::new(0b11, 0), 3
+        );
+        let field2 = RegisterFieldValue::<u32>::new(
+            RegisterField::<u32>::new(0b11, 1), 1
+        );
+
+        let expected = RegisterFieldValue::<u32>::new(
+            RegisterField::<u32>::new(0b010, 0), 2
+        );
+
+        assert_eq!(expected, field1 & field2);
+    }
+}
