@@ -2,7 +2,7 @@
 
 This crate provides access to ARM Aarch64 system registers as well as specific assembly instructions. The system registers are organized based on the highest exception level they are available.
 
-[![Travis-CI Status](https://api.travis-ci.org/RusPiRo/ruspiro-arch-aarch64.svg?branch=release)](https://travis-ci.org/RusPiRo/ruspiro-arch-aarch64)
+[![Travis-CI Status](https://api.travis-ci.com/RusPiRo/ruspiro-arch-aarch64.svg?branch=release)](https://travis-ci.com/RusPiRo/ruspiro-arch-aarch64)
 [![Latest Version](https://img.shields.io/crates/v/ruspiro-arch-aarch64.svg)](https://crates.io/crates/ruspiro-arch-aarch64)
 [![Documentation](https://docs.rs/ruspiro-arch-aarch64/badge.svg)](https://docs.rs/ruspiro-arch-aarch64)
 [![License](https://img.shields.io/crates/l/ruspiro-arch-aarch64.svg)](https://github.com/RusPiRo/ruspiro-arch-aarch64#license)
@@ -13,7 +13,7 @@ To use this crate simply add the dependency to your ``Cargo.toml`` file:
 
 ```toml
 [dependencies]
-ruspiro-arch-aarch64 = "0.1.1"
+ruspiro-arch-aarch64 = "0.1.2"
 ```
 
 With the dependency maintained in the *Cargo.toml* file the different defined system registers can be accessed as shown in the following code snipped.
