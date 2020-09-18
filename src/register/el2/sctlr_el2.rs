@@ -16,7 +16,7 @@
 //!
 
 use crate::register::*;
-use crate::{define_aarch64_register, impl_system_register_rw, register_field};
+use crate::{define_aarch64_register, impl_system_register_rw};
 
 define_aarch64_register! {
     @sctlr_el2<u64> {
