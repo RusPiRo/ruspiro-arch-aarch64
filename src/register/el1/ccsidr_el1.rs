@@ -1,8 +1,8 @@
 /***********************************************************************************************************************
- * Copyright (c) 2019 by the authors
- *
- * Author: André Borrmann
- * License: Apache 2.0
+ * Copyright (c) 2020 by the authors
+ * 
+ * Author: André Borrmann <pspwizard@gmx.de>
+ * License: Apache License 2.0 / MIT
  **********************************************************************************************************************/
 
 //! # CCSIDR_EL1 - Cache Size ID Register
@@ -16,7 +16,7 @@
 //!
 
 use crate::register::*;
-use crate::{define_aarch64_register, impl_system_register_rw, register_field};
+use crate::{define_aarch64_register, impl_system_register_rw};
 
 define_aarch64_register! {
     @ccsidr_el1<u32> {
