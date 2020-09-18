@@ -1,32 +1,14 @@
 /***********************************************************************************************************************
- * Copyright (c) 2019 by the authors
- *
- * Author: André Borrmann
- * License: Apache License 2.0
+ * Copyright (c) 2020 by the authors
+ * 
+ * Author: André Borrmann <pspwizard@gmx.de>
+ * License: Apache License 2.0 / MIT
  **********************************************************************************************************************/
 
 //! # Register definition macros
 //!
 //! The macros are used to simplify the definition of system registers.
 //!
-
-/// Helper macro to define the fields a register may contain of.<br>
-/// This is typically part of the register definition and will be applied there. It's not intended for use outside
-/// of a register definition.
-#[doc(hidden)]
-#[macro_export]
-macro_rules! register_field {
-    ($t:ty, $field:ident, $offset:expr) => {
-        #[allow(unused_variables, dead_code)]
-        #[doc(hidden)]
-        pub const $field: RegisterField<$t> = RegisterField::<$t>::new(1, $offset);
-    };
-    ($t:ty, $field:ident, $offset:expr, $bits:expr) => {
-        #[allow(unused_variables, dead_code)]
-        #[doc(hidden)]
-        pub const $field: RegisterField<$t> = RegisterField::<$t>::new((1 << $bits) - 1, $offset);
-    };
-}
 
 /// Helper macro to implement shared register functions for aarch32/64 system registers
 #[doc(hidden)]
@@ -107,7 +89,7 @@ macro_rules! define_aarch64_register {
                 #[allow(unused_imports)]
                 use super::*;
 
-                register_field!($t, Field, $offset $(, $bits)?);
+                $crate::register_field!($t, Field, $offset $(, $bits)?);
 
                 /// Create a ``RegisterFieldValue`` from the current ``RegisterField``
                 /// of this ``Register`` from a given value

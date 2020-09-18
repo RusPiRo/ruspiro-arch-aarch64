@@ -1,16 +1,16 @@
 [package]
 name = "ruspiro-arch-aarch64"
 authors = ["André Borrmann <pspwizard@gmx.de>"]
-version = "0.1.1" # remember to update html_root_url in lib.rs
+version = "0.1.2" # remember to update html_root_url in lib.rs
 description = """
-Place a brief description of this library here
+This crate provides access to Aarch64 system registers as well as specific usefull aarch64 assembly instructions
 """
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/RusPiRo/ruspiro-arch-aarch64/tree/v||VERSION||"
 documentation = "https://docs.rs/ruspiro-arch-aarch64/||VERSION||"
 categories = ["no-std", "embedded"]
-keywords = ["ruspiro"]
+keywords = ["ruspiro", "aarch64", "register"]
 edition = "2018"
 exclude = [".travis.yml", "Makefile.toml"]
 
@@ -25,17 +25,10 @@ maintenance = { status = "actively-developed" }
 # cc = "1.0"
 
 [dependencies]
-# list other dependencies here
-# for every RUSPIRO dependency a corresponding entry
-# in the [patch.crates-io] section pointing to the actual master branch
-# of this crate is required - example:
-# ruspiro-register = "0.4"
+ruspiro-register = "0.5"
 
 [features]
 ruspiro_pi3 = [ ]
 
 [patch.crates-io]
-# we require an entry for each dependent RUSPIRO crate here
-# this increases PR build stability if dependent crates got updated but are not
-# published to crates.io yet
-# ruspiro-register = { git = "https://github.com/RusPiRo/ruspiro-register.git" }
+ruspiro-register = { git = "https://github.com/RusPiRo/ruspiro-register.git", branch = "master" }

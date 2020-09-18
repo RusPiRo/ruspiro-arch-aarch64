@@ -1,8 +1,8 @@
 /***********************************************************************************************************************
- * Copyright (c) 2019 by the authors
- *
- * Author: André Borrmann
- * License: Apache 2.0
+ * Copyright (c) 2020 by the authors
+ * 
+ * Author: André Borrmann <pspwizard@gmx.de>
+ * License: Apache License 2.0 / MIT
  **********************************************************************************************************************/
 
 //! # TCR_EL1 - Translation Control Register EL1
@@ -18,7 +18,7 @@
 //!
 
 use crate::register::*;
-use crate::{define_aarch64_register, impl_system_register_rw, register_field};
+use crate::{define_aarch64_register, impl_system_register_rw};
 
 define_aarch64_register! {
     @tcr_el1<u32> {
