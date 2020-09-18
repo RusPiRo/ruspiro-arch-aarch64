@@ -1,5 +1,18 @@
 # Changelog
 
+## :strawberry: v0.1.2
+
+The `ruspiro-register` crate was refactored to only contained shared structures and macros eble to be re-used by other crates like this one implementing the register functions. So this version utilizes this crate as dependency.
+
+- ### :wrench: Maintenance
+
+  - Maintained the proper dependency and adjusted the tpe and macros usages
+  - Adjusted the file headers to reflect copyright as of 2020 and the correct author
+
+- ### :book: Documentation
+
+  - Fixed minor documentation flaws
+
 ## :peach: v0.1.1
 
 This release enhances the documentation in the README.md to appear at [crates.io](https://crates.io) to help users to understand how to use this crate.
