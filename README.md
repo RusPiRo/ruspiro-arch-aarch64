@@ -13,7 +13,7 @@ To use this crate simply add the dependency to your ``Cargo.toml`` file:
 
 ```toml
 [dependencies]
-ruspiro-arch-aarch64 = "0.1.2"
+ruspiro-arch-aarch64 = "||VERSION||"
 ```
 
 With the dependency maintained in the *Cargo.toml* file the different defined system registers can be accessed as shown in the following code snipped.
