@@ -1,6 +1,6 @@
 /***********************************************************************************************************************
  * Copyright (c) 2020 by the authors
- * 
+ *
  * Author: André Borrmann <pspwizard@gmx.de>
  * License: Apache License 2.0 / MIT
  **********************************************************************************************************************/
@@ -19,7 +19,7 @@ use crate::register::*;
 use crate::{define_aarch64_register, impl_system_register_rw};
 
 define_aarch64_register! {
-    @ccsidr_el1<u32> {
+    @ccsidr_el1<u64> {
         /// Indicates the (log2(number of words in cache line)) - 2
         LINESIZE OFFSET(0) BITS(3) [
             /// 16 words per line
@@ -28,7 +28,7 @@ define_aarch64_register! {
         /// Indicates the associativity of the cache - 1. A value of 0 indicates an associativity of
         /// 1. It does not need to be a power of 2.
         ASSOC OFFSET(3) BITS(10),
-        /// Indeicates the number of sets in cache - 1. A value of 0 indeicates 1 set in the cache.
+        /// Indicates the number of sets in cache - 1. A value of 0 indeicates 1 set in the cache.
         /// It does not need to be a power of 2.
         NUMSETS OFFSET(13) BITS(15),
         /// Indicates support for write-allocation

@@ -1,6 +1,6 @@
 /***********************************************************************************************************************
  * Copyright (c) 2020 by the authors
- * 
+ *
  * Author: André Borrmann <pspwizard@gmx.de>
  * License: Apache License 2.0 / MIT
  **********************************************************************************************************************/
@@ -17,35 +17,35 @@ pub fn nop() {
     unsafe { llvm_asm!("nop"::::"volatile") };
 }
 
-/// assembly instruction WFE 
+/// assembly instruction WFE
 #[inline]
 #[allow(dead_code)]
 pub fn wfe() {
     unsafe { llvm_asm!("wfe") };
 }
 
-/// assembly instruction SEV 
+/// assembly instruction SEV
 #[inline]
 #[allow(dead_code)]
 pub fn sev() {
     unsafe { llvm_asm!("sev") };
 }
 
-/// assembly instruction ISB 
+/// assembly instruction ISB
 #[inline]
 #[allow(dead_code)]
 pub fn isb() {
     unsafe { llvm_asm!("isb sy") };
 }
 
-/// assembly instruction DSB 
+/// assembly instruction DSB
 #[inline]
 #[allow(dead_code)]
 pub fn dsb() {
     unsafe { llvm_asm!("dsb sy") };
 }
 
-/// assembly instruction DSB 
+/// assembly instruction DSB
 #[inline]
 #[allow(dead_code)]
 pub fn dmb() {

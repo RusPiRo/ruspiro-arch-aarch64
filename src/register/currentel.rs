@@ -1,6 +1,6 @@
 /***********************************************************************************************************************
  * Copyright (c) 2020 by the authors
- * 
+ *
  * Author: André Borrmann <pspwizard@gmx.de>
  * License: Apache License 2.0 / MIT
  **********************************************************************************************************************/
@@ -12,7 +12,6 @@
 //! ```no_run
 //! # use ruspiro_arch_aarch64::register::*;
 //!
-//! # fn main() {
 //! // read the current exeption level - do this by accessing the predefined
 //! // register field
 //! let current_el = currentel::read(currentel::EL::Field);
@@ -20,7 +19,6 @@
 //! if current_el == currentel::EL::EL2 {
 //!     /* do something */
 //! }
-//! # }
 //! ```
 
 use crate::register::*;
