@@ -1,5 +1,21 @@
 # Changelog
 
+## :melon: v0.1.3
+
+- ### :bulb: Features
+
+  - add new register CSSER_EL1
+
+- ### :wrench: Maintenance
+
+  - provide field value definitions for register CLIDR_EL1
+  - fix register size CCSIDR_EL1 to 64Bit
+
+- ### :detective: Fixes
+  
+  - fix travis-ci config for improved publishing
+  - fix travis-ci config as the wrong url for retrieving last version was used
+
 ## :strawberry: v0.1.2
 
 The `ruspiro-register` crate was refactored to only contained shared structures and macros eble to be re-used by other crates like this one implementing the register functions. So this version utilizes this crate as dependency.
