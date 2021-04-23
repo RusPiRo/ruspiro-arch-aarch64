@@ -14,29 +14,29 @@
 #[doc(hidden)]
 #[macro_export]
 macro_rules! impl_system_register_rw {
-    ($t:ty) => {
-        /// Update the contents of a register from the ``RegisterFieldValue`` given. This will
-        /// only change the bits the ``RegisterField`` definition specifies.
-        #[inline]
-        #[allow(dead_code)]
-        pub fn write(field_value: RegisterFieldValue<$t>) {
-            let raw_value = (get() & !field_value.mask()) | field_value.raw_value();
-            set(raw_value);
-        }
+  ($t:ty) => {
+    /// Update the contents of a register from the ``RegisterFieldValue`` given. This will
+    /// only change the bits the ``RegisterField`` definition specifies.
+    #[inline]
+    #[allow(dead_code)]
+    pub fn write(field_value: RegisterFieldValue<$t>) {
+      let raw_value = (get() & !field_value.mask()) | field_value.raw_value();
+      set(raw_value);
+    }
 
-        /// Read the contents of a specific ``RegisterField``. The returned value is already shifted
-        /// to the right to start at bit 0. This means for a field value stored in the register at
-        /// bit offset 3, the returned value is already shifted by 3 bits to the right.
-        /// For example:
-        /// If register raw value is 0b10110, the returned value for a register field specified as
-        /// bits\[4:3\] would be 0b01. No further "masking" or "bit-shift" required
-        #[inline]
-        #[allow(dead_code)]
-        pub fn read(field: RegisterField<$t>) -> RegisterFieldValue<$t> {
-            let raw_value = get() & field.mask();
-            RegisterFieldValue::<$t>::new(field, raw_value >> field.shift())
-        }
-    };
+    /// Read the contents of a specific ``RegisterField``. The returned value is already shifted
+    /// to the right to start at bit 0. This means for a field value stored in the register at
+    /// bit offset 3, the returned value is already shifted by 3 bits to the right.
+    /// For example:
+    /// If register raw value is 0b10110, the returned value for a register field specified as
+    /// bits\[4:3\] would be 0b01. No further "masking" or "bit-shift" required
+    #[inline]
+    #[allow(dead_code)]
+    pub fn read(field: RegisterField<$t>) -> RegisterFieldValue<$t> {
+      let raw_value = get() & field.mask();
+      RegisterFieldValue::<$t>::new(field, raw_value >> field.shift())
+    }
+  };
 }
 
 /// Macro to define an Aarch64 system register and its fields

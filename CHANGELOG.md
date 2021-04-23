@@ -1,5 +1,9 @@
 # Changelog
 
+## :banana: v0.1.4
+
+This is mainly a maintenance version migrating the build pipeline to GitHub Actions.
+
 ## :melon: v0.1.3
 
 - ### :bulb: Features
