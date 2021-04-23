@@ -2,7 +2,7 @@
 
 This crate provides access to ARM Aarch64 system registers as well as specific assembly instructions. The system registers are organized based on the highest exception level they are available.
 
-[![Travis-CI Status](https://api.travis-ci.com/RusPiRo/ruspiro-arch-aarch64.svg?branch=release)](https://travis-ci.com/RusPiRo/ruspiro-arch-aarch64)
+![CI](https://github.com/RusPiRo/ruspiro-arch-aarch64/workflows/CI/badge.svg?branch=development)
 [![Latest Version](https://img.shields.io/crates/v/ruspiro-arch-aarch64.svg)](https://crates.io/crates/ruspiro-arch-aarch64)
 [![Documentation](https://docs.rs/ruspiro-arch-aarch64/badge.svg)](https://docs.rs/ruspiro-arch-aarch64)
 [![License](https://img.shields.io/crates/l/ruspiro-arch-aarch64.svg)](https://github.com/RusPiRo/ruspiro-arch-aarch64#license)
