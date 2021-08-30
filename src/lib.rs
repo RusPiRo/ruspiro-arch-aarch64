@@ -6,8 +6,9 @@
  **********************************************************************************************************************/
 #![doc(html_root_url = "https://docs.rs/ruspiro-arch-aarch64/||VERSION||")]
 // we require to run with 'std' in unit tests and doc tests to have an allocator in place
-#![cfg_attr(not(any(test, doctest)), no_std)]
-#![feature(llvm_asm, const_fn)]
+//#![cfg_attr(not(any(test, doctest)), no_std)]
+#![no_std]
+#![feature(asm)]
 
 //! # RusPiRo Aarch64 specific API
 //!

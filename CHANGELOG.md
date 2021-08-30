@@ -1,5 +1,15 @@
 # Changelog
 
+## :lemon: v0.1.5
+
+Update the implementation to work with the current Rust version (1.56.0-nightly)
+
+- ### :wrench: Maintenance
+
+  - Remove the `const_fn` feature as this has been removed
+  - Replace the `llvm_asm` macros with the `asm` version
+  - build the single crate with `aarch64-unknown-none` target
+
 ## :banana: v0.1.4
 
 This is mainly a maintenance version migrating the build pipeline to GitHub Actions.
