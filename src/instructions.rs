@@ -9,6 +9,7 @@
 //!
 //! Functions to emit specific assembly instructions
 //!
+use core::arch::asm;
 
 /// assembly NOP instruction
 #[inline]

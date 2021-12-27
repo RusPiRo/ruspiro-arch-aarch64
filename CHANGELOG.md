@@ -1,5 +1,15 @@
 # Changelog
 
+## :apple: v0.1.6
+
+Update the crate to compile with latest Rust nightly and Rust edition 2021
+
+- ### :wrench: Maintenance
+
+  - update `Cargo.toml` to use edition 2021
+  - remove `asm` feature flag is it is stabelized now
+  - update dependencies
+
 ## :lemon: v0.1.5
 
 Update the implementation to work with the current Rust version (1.56.0-nightly)
