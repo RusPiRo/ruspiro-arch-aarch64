@@ -1,7 +1,7 @@
 [package]
 name = "ruspiro-arch-aarch64"
 authors = ["André Borrmann <pspwizard@gmx.de>"]
-version = "0.1.6" # remember to update html_root_url in lib.rs
+version = "0.1.7" # remember to update html_root_url in lib.rs
 description = """
 This crate provides access to Aarch64 system registers as well as specific usefull aarch64 assembly instructions
 """
@@ -20,7 +20,7 @@ maintenance = { status = "actively-developed" }
 [lib]
 
 [dependencies]
-ruspiro-register = "~0.5.4"
+ruspiro-register = "~0.5.5"
 
 [package.metadata.docs.rs]
 default-target = "aarch64-unknown-linux-gnu"
