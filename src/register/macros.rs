@@ -115,7 +115,7 @@ macro_rules! define_aarch64_register {
         pub fn get() -> $t {
             let raw_value: $t;
             unsafe {
-                asm!(
+                core::arch::asm!(
                     concat!("mrs {0:x}, ", stringify!($name)),
                     out(reg) raw_value
                 )
@@ -128,7 +128,7 @@ macro_rules! define_aarch64_register {
         #[allow(dead_code)]
         pub fn set(raw_value: $t) {
             unsafe {
-                asm!(
+                core::arch::asm!(
                     concat!("msr ", stringify!($name) , ", {0:x} "),
                     in(reg) raw_value
                 )

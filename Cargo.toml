@@ -1,7 +1,7 @@
 [package]
 name = "ruspiro-arch-aarch64"
 authors = ["André Borrmann <pspwizard@gmx.de>"]
-version = "0.1.5" # remember to update html_root_url in lib.rs
+version = "0.1.6" # remember to update html_root_url in lib.rs
 description = """
 This crate provides access to Aarch64 system registers as well as specific usefull aarch64 assembly instructions
 """
@@ -11,7 +11,7 @@ repository = "https://github.com/RusPiRo/ruspiro-arch-aarch64/tree/v||VERSION||"
 documentation = "https://docs.rs/ruspiro-arch-aarch64/||VERSION||"
 categories = ["no-std", "embedded"]
 keywords = ["ruspiro", "aarch64", "register"]
-edition = "2018"
+edition = "2021"
 exclude = ["Makefile.toml", ".cargo/config.toml"]
 
 [badges]
@@ -19,15 +19,12 @@ maintenance = { status = "actively-developed" }
 
 [lib]
 
-[build-dependencies]
-# uncomment this if a build.rs script should be run as part of the build process
-# cc = "1.0"
-
 [dependencies]
-ruspiro-register = "0.5"
+ruspiro-register = "~0.5.4"
 
-[features]
-ruspiro_pi3 = [ ]
+[package.metadata.docs.rs]
+default-target = "aarch64-unknown-linux-gnu"
+features = []
 
 [patch.crates-io]
 ruspiro-register = { git = "https://github.com/RusPiRo/ruspiro-register.git", branch = "development" }
