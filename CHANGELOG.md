@@ -1,5 +1,11 @@
 # Changelog
 
+## :apple: v0.1.7
+
+- ### :wrench: Maintenance
+
+  - update dependencies
+
 ## :apple: v0.1.6
 
 Update the crate to compile with latest Rust nightly and Rust edition 2021
